@@ -1,0 +1,22 @@
+diff --git a/third_party/protobuf/src/google/protobuf/stubs/casts.h b/third_party/protobuf/src/google/protobuf/stubs/casts.h
+index ad29dac1f8763..a70969e132cc2 100644
+--- a/third_party/protobuf/src/google/protobuf/stubs/casts.h
++++ b/third_party/protobuf/src/google/protobuf/stubs/casts.h
+@@ -93,7 +93,7 @@ inline To down_cast(From* f) {                   // so we only accept pointers
+ #if !defined(NDEBUG) && PROTOBUF_RTTI
+   assert(f == nullptr || dynamic_cast<To>(f) != nullptr);  // RTTI: debug mode only!
+ #endif
+-  return static_cast<To>(f);
++  return dynamic_cast<To>(f);
+ }
+ 
+ template<typename To, typename From>    // use like this: down_cast<T&>(foo);
+@@ -111,7 +111,7 @@ inline To down_cast(From& f) {
+   // RTTI: debug mode only!
+   assert(dynamic_cast<ToAsPointer>(&f) != nullptr);
+ #endif
+-  return *static_cast<ToAsPointer>(&f);
++  return *dynamic_cast<ToAsPointer>(&f);
+ }
+ 
+ template<typename To, typename From>
